@@ -33,3 +33,14 @@ Analyze job offers and prepare applications (documents tailored to each offer).
 ## 7. Safeguards
 Safeguards are added here as new subsections (7.1, 7.2…), with date and reason.
 Sections 1–6 are not modified to introduce them.
+### 7.1 — Verify staged content before every commit
+**Date:** 2026-10-22
+**Reason:** A commit freezes what is in the staging area, not what is open in
+the editor. On 2026-10-21 the staging area held an older version of a file
+(added manually earlier) while the working tree held the intended one; a blind
+commit would have recorded the wrong version. `git status` names *which* file
+is staged but not *what* it contains.
+
+**Rule:** Before every `git commit`, run `git diff --staged` and confirm the
+staged content is exactly what should be recorded. If it is not, stop and fix
+the staging before committing. `git status` alone is not sufficient.
